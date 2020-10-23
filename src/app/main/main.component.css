@@ -1,0 +1,34 @@
+.example-container {
+  margin-top: 10px;
+}
+.example-card {
+  max-width: 400px;
+  background-size: cover;
+  text-align: left;
+  margin: 0 auto;
+}
+.text{
+  font-size: 40px;
+}
+.text-opacity{
+  margin-top: 3%;
+  opacity: 0.5;
+}
+.interval{
+  margin-bottom: 20px;
+}
+.mat-form-field{
+  width: 250px;
+}
+.mat-raised-button{
+  width: 250px;
+}
+.info-table{
+  margin-top: 7%;
+  text-align: left;
+}
+.\.redtext{
+  font-size: large;
+  color: red;
+  margin-bottom: 3%;
+}

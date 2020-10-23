@@ -1,0 +1,35 @@
+.example-container {
+  margin-top: 10px;
+}
+.example-card {
+  max-width: 600px;
+  background-size: cover;
+  text-align: left;
+  margin: 0 auto;
+}
+.info-table{
+  text-align: right;
+}
+.mat-form-field{
+  width: 350px;
+}
+.number-field{
+  width: 160px;
+}
+.area{
+  height: 250px;
+}
+.space{
+  margin-left: 15%;
+}
+.interval{
+  margin-left: 40%;
+}
+.text{
+  font-size: 40px;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+.mat-raised-button{
+  width: 150px;
+}

@@ -1,0 +1,145 @@
+<div class="example-container">
+  <mat-card class="example-card">
+    <div class="space">
+      <div class="text">
+        <b>Add/edit</b>
+      </div>
+    </div>
+    <table class="info-table">
+      <tr>
+        <td width="30%"><h2>Name*</h2></td>
+        <td width="15%"></td>
+        <td width="55%">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput maxlength="50" type="text" [formControl]="nameControl"
+                   [(ngModel)]="service.name">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td width="30%"><h2>Model*</h2></td>
+        <td width="15%"></td>
+        <td width="55%">
+          <mat-form-field appearance="fill">
+            <mat-label>Model</mat-label>
+            <input matInput maxlength="50" type="text" [formControl]="modelControl"
+                   [(ngModel)]="service.model">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td width="30%"><h2>Range</h2></td>
+        <td width="15%"><h2>From</h2></td>
+        <td width="55%">
+          <table class="info-table">
+            <tr>
+              <td width="40%">
+                <mat-form-field appearance="fill" class="number-field">
+                  <input matInput maxlength="50" type="number" [(ngModel)]="service.range1">
+                </mat-form-field>
+              </td>
+              <td width="20%"><h2>To</h2></td>
+              <td width="40%">
+                <mat-form-field appearance="fill" class="number-field">
+                  <input matInput maxlength="50" type="number" [(ngModel)]="service.range2">
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td width="30%"><h2>Type*</h2></td>
+        <td width="15%"></td>
+        <td width="55%">
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <input type="text"
+                   matInput
+                   [formControl]="typeControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td width="30%"><h2>Unit*</h2></td>
+        <td width="15%"></td>
+        <td width="55%">
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <input type="text"
+                   matInput
+                   [formControl]="unitControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td width="30%"><h2>Location</h2></td>
+        <td width="15%"></td>
+        <td width="55%">
+          <mat-form-field appearance="fill">
+            <mat-label>location</mat-label>
+            <input matInput maxlength="50" type="text" [(ngModel)]="service.location">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td width="30%"><h2>Description</h2></td>
+        <td width="15%"></td>
+        <td width="55%">
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Here is a some text input.
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              Here is another paragraph of input.
+            </mat-label>
+            <textarea matInput type="text" [(ngModel)]="service.description" class="area"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <div class="space">
+      <div *ngIf="nameControl.hasError('required') || modelControl.hasError('required')
+|| typeControl.hasError('required') || unitControl.hasError('required')">
+        <button mat-raised-button disabled>Save</button>
+        <span class="interval">
+        <button mat-raised-button color="primary" [routerLink]="['table']">
+          Cancel
+        </button>
+  </span>
+      </div>
+      <div *ngIf="!nameControl.hasError('required') && !modelControl.hasError('required')
+&& !typeControl.hasError('required') && !unitControl.hasError('required')">
+        <button mat-raised-button color="primary" [routerLink]="['table']">
+          Save
+        </button>
+        <span class="interval">
+        <button mat-raised-button color="primary" [routerLink]="['table']">
+          Cancel
+        </button>
+        </span>
+      </div>
+
+    </div>
+  </mat-card>
+</div>
+<br>
+

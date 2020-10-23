@@ -1,0 +1,56 @@
+<div class="example-container">
+  <mat-card class="example-card">
+    <form id="accesspanel" action="">
+      <div class="text"><strong>Login Form:</strong></div>
+      <div class="text-opacity">enter login and password for access</div>
+      <table class="info-table">
+        <tr>
+          <td width="30%"><h2>Login</h2></td>
+          <td width="70%">
+            <mat-form-field appearance="fill">
+              <mat-label>Your login</mat-label>
+              <input matInput type="text" name="userName" id="username" maxlength="50" [(ngModel)]="userName"
+                     [formControl]="loginFormControl">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td width="30%"><h2>Password</h2></td>
+          <td width="70%">
+            <mat-form-field appearance="fill">
+              <mat-label>Your password</mat-label>
+              <input matInput type="password" name="password" [(ngModel)]="password" id="password"
+                     [type]="hide ? 'password' : 'text'" [formControl]="passwordFormControl">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td width="30%"></td>
+          <td width="70%">
+              <div *ngIf="loginFormControl.hasError('required') || passwordFormControl.hasError('required')">
+                <nav class="interval">
+                  <button mat-raised-button disabled color="primary">Login</button>
+                </nav>
+              </div>
+              <div *ngIf="!loginFormControl.hasError('required') && !passwordFormControl.hasError('required')">
+                <nav class="interval">
+                  <button mat-raised-button type="submit" name="Login" id="go" value="Login" (click)="doLogin()"
+                          color="primary">Login
+                  </button>
+                </nav>
+              </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br>
+    <div class=".redtext">{{service.message}}</div>
+    <div *ngIf="service.token"><h2>You are successfully logged in</h2></div>
+  </mat-card>
+</div>
+<br>
+

@@ -1,0 +1,11 @@
+h1 {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.bg { background-color:#B0E0E6; min-height: 100%;}
