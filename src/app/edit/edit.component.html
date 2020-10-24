@@ -36,13 +36,13 @@
             <tr>
               <td width="40%">
                 <mat-form-field appearance="fill" class="number-field">
-                  <input matInput maxlength="50" type="number" [(ngModel)]="service.range1">
+                  <input matInput type="number" [(ngModel)]="service.range1">
                 </mat-form-field>
               </td>
               <td width="20%"><h2>To</h2></td>
               <td width="40%">
                 <mat-form-field appearance="fill" class="number-field">
-                  <input matInput maxlength="50" type="number" [(ngModel)]="service.range2">
+                  <input matInput type="number" [(ngModel)]="service.range2">
                 </mat-form-field>
               </td>
             </tr>
@@ -121,18 +121,18 @@
 || typeControl.hasError('required') || unitControl.hasError('required')">
         <button mat-raised-button disabled>Save</button>
         <span class="interval">
-        <button mat-raised-button color="primary" [routerLink]="['table']">
+        <button mat-raised-button color="primary" [routerLink]="['/table']">
           Cancel
         </button>
   </span>
       </div>
       <div *ngIf="!nameControl.hasError('required') && !modelControl.hasError('required')
 && !typeControl.hasError('required') && !unitControl.hasError('required')">
-        <button mat-raised-button color="primary" [routerLink]="['table']">
+        <button mat-raised-button color="primary">
           Save
         </button>
         <span class="interval">
-        <button mat-raised-button color="primary" [routerLink]="['table']">
+        <button mat-raised-button color="primary" [routerLink]="['/table']">
           Cancel
         </button>
         </span>

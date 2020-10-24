@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
-
 import { HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
@@ -21,13 +19,15 @@ import { MatChipsModule} from '@angular/material/chips';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatCardModule} from '@angular/material/card';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import { MatRadioModule} from '@angular/material/radio';
+import { MatSelectModule} from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { EditComponent } from './edit/edit.component';
 import { TableComponent } from './table/table.component';
-import {MatSelectModule} from '@angular/material/select';
-
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent},
@@ -65,7 +65,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

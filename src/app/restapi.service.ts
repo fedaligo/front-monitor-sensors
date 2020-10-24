@@ -12,8 +12,8 @@ export class RestapiService {
   public token: any;
   public name: any;
   public model: any;
-  public range1: any;
-  public range2: any;
+  public range1: any = 12;
+  public range2: any = 45;
   public type: any;
   public unit: any;
   public location: any;
@@ -31,7 +31,7 @@ export class RestapiService {
     this.message = '';
     const body = {userName, password};
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(userName + ':' + password)});
-    this.http.post('https://collector-fed.herokuapp.com/users/authenticate', body, {
+    this.http.post('http://localhost:5000/users/authenticate', body, {
       headers,
       responseType: 'text' as 'json'
     }).subscribe((response) => {
@@ -50,11 +50,11 @@ export class RestapiService {
   }
   getRole() {
     const headers = new HttpHeaders({Authorization: `Bearer ${this.getTokenFromLocalStorage()}`});
-    this.http.get('https://collector-fed.herokuapp.com/users/usersrole', {
+    this.http.get('http://localhost:5000/users/usersrole', {
       headers,
       responseType: 'text' as 'json'
     }).subscribe((response) => {
-      if (response === '[admin]') {
+      if (response === '[administrator]') {
         this.role = response;
         localStorage.setItem('roleAdmin', this.role);
       }

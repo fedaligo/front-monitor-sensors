@@ -1,4 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {RestapiService} from '../restapi.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {newArray} from '@angular/compiler/src/util';
+
+export interface Sensors {
+  id: number;
+  sensorsName: string;
+  model: string;
+  rangeFrom: number;
+  rangeTo: number;
+  type: string;
+  unit: string;
+  location: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-table',
@@ -6,10 +24,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+  displayedColumns: string[] = ['edit', 'name', 'model', 'type', 'range', 'unit', 'location', 'delete'];
+  data: Sensors[];
+  dataSource: MatTableDataSource<Sensors>;
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngOnInit(): void {
+  constructor(public service: RestapiService, private http: HttpClient) {
   }
-
+  ngOnInit() {
+    this.getLista();
+  }
+  getLista(): void {
+    this.getSensors().subscribe(lista => {
+      this.data = lista;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+  getSensors(): Observable<Sensors[]>  {
+    return this.http.get<Sensors[]>('http://localhost:5000/sensors/allsensors');
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
+
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {RestapiService} from '../restapi.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-edit',
@@ -21,5 +22,5 @@ export class EditComponent{
   unitControl = new FormControl('', [
     Validators.required,
   ]);
-  constructor(public service: RestapiService) { }
+  constructor(public service: RestapiService, private http: HttpClient) { }
 }

@@ -21,6 +21,9 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
+    "angular-hint": "^0.3.8",
+    "hint": "file:hint.css-2.6.0",
+    "hint.css": "^2.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

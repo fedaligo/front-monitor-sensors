@@ -33,12 +33,12 @@
           <td width="70%">
               <div *ngIf="loginFormControl.hasError('required') || passwordFormControl.hasError('required')">
                 <nav class="interval">
-                  <button mat-raised-button disabled color="primary">Login</button>
+                  <button mat-raised-button disabled color="primary" >Login</button>
                 </nav>
               </div>
               <div *ngIf="!loginFormControl.hasError('required') && !passwordFormControl.hasError('required')">
                 <nav class="interval">
-                  <button mat-raised-button type="submit" name="Login" id="go" value="Login" (click)="doLogin()"
+                  <button mat-raised-button type="submit" name="Login" id="go" value="Login" [routerLink]="['/table']" (click)="doLogin()"
                           color="primary">Login
                   </button>
                 </nav>
@@ -49,7 +49,6 @@
     </form>
     <br>
     <div class=".redtext">{{service.message}}</div>
-    <div *ngIf="service.token"><h2>You are successfully logged in</h2></div>
   </mat-card>
 </div>
 <br>

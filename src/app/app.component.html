@@ -6,7 +6,8 @@
       </span>
       <span class="example-spacer"></span>
       <div>
-        <button mat-raised-button (click)="service.logout()" [routerLink]="['/sign']" color="primary">Logout</button>
+        {{service.userName}}
+        <button mat-raised-button (click)="service.logout()" [routerLink]="['']" color="primary">Logout</button>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
