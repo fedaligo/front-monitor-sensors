@@ -31,7 +31,6 @@
     "@angular/router": "~10.2.0",
     "angular-hint": "^0.3.8",
     "express": "^4.17.1",
-    "hint": "file:hint.css-2.6.0",
     "hint.css": "^2.6.0",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
