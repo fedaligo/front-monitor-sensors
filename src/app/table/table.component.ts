@@ -43,7 +43,7 @@ export class TableComponent implements OnInit {
     });
   }
   getSensors(): Observable<Sensors[]>  {
-    return this.http.get<Sensors[]>('http://localhost:5000/sensors/allsensors');
+    return this.http.get<Sensors[]>('https://back-monitor-sensors-fed.herokuapp.com/sensors/allsensors');
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -51,7 +51,7 @@ export class TableComponent implements OnInit {
   }
   deleteSensor(id) {
     const headers = new HttpHeaders({Authorization: `Bearer ${this.service.getTokenFromLocalStorage()}`});
-    this.http.delete('http://localhost:5000/sensors/delete/' + id, {
+    this.http.delete('https://back-monitor-sensors-fed.herokuapp.com/sensors/delete/' + id, {
       headers, responseType: 'text' as 'json'
     }).subscribe((response) => {
       this.ngOnInit();

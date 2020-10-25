@@ -51,7 +51,7 @@ export class EditComponent{
     const body = {
         sensorsName: this.sensorsName, model: this.model, rangeFrom: this.rangeFrom, rangeTo: this.rangeTo,
         type: this.type, unit: this.unit, location: this.location, description: this.description };
-    this.http.post('http://localhost:5000/sensors/create', body, {headers, responseType: 'text' as 'json'}).subscribe((response) => {
+    this.http.post('https://back-monitor-sensors-fed.herokuapp.com/sensors/create', body, {headers, responseType: 'text' as 'json'}).subscribe((response) => {
       });
   }
   updateSensor() {
@@ -59,16 +59,16 @@ export class EditComponent{
     const body = {id: this.id,
       sensorsName: this.sensorsName, model: this.model, rangeFrom: this.rangeFrom, rangeTo: this.rangeTo,
       type: this.type, unit: this.unit, location: this.location, description: this.description };
-    this.http.put('http://localhost:5000/sensors/update', body, {headers, responseType: 'text' as 'json'}).subscribe((response) => {
+    this.http.put('https://back-monitor-sensors-fed.herokuapp.com/sensors/update', body, {headers, responseType: 'text' as 'json'}).subscribe((response) => {
     });
   }
   getType(){
-    this.http.get<string[]>('http://localhost:5000/type/alltypenames').subscribe((response) => {
+    this.http.get<string[]>('https://back-monitor-sensors-fed.herokuapp.com/type/alltypenames').subscribe((response) => {
     this.typeValues = response as string[];
   });
   }
   getUnit(){
-    this.http.get<string[]>('http://localhost:5000/unit/allunitnames').subscribe((response) => {
+    this.http.get<string[]>('https://back-monitor-sensors-fed.herokuapp.com/unit/allunitnames').subscribe((response) => {
       this.unitValues = response as string[];
     });
   }
