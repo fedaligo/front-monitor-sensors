@@ -4,6 +4,7 @@ import {RestapiService} from '../restapi.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Sensors} from '../table/table.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -42,7 +43,7 @@ export class EditComponent{
   unitControl = new FormControl('', [
     Validators.required,
   ]);
-  constructor(public service: RestapiService, private http: HttpClient) {
+  constructor(public service: RestapiService, private http: HttpClient, private router: Router) {
     this.getType();
     this.getUnit();
   }
@@ -52,7 +53,8 @@ export class EditComponent{
         sensorsName: this.sensorsName, model: this.model, rangeFrom: this.rangeFrom, rangeTo: this.rangeTo,
         type: this.type, unit: this.unit, location: this.location, description: this.description };
     this.http.post('https://back-monitor-sensors-fed.herokuapp.com/sensors/create', body, {headers, responseType: 'text' as 'json'}).subscribe((response) => {
-      });
+      this.router.navigate(['/table']);
+    });
   }
   updateSensor() {
     const headers = new HttpHeaders({Authorization: `Bearer ${this.service.getTokenFromLocalStorage()}`});
@@ -60,6 +62,7 @@ export class EditComponent{
       sensorsName: this.sensorsName, model: this.model, rangeFrom: this.rangeFrom, rangeTo: this.rangeTo,
       type: this.type, unit: this.unit, location: this.location, description: this.description };
     this.http.put('https://back-monitor-sensors-fed.herokuapp.com/sensors/update', body, {headers, responseType: 'text' as 'json'}).subscribe((response) => {
+      this.router.navigate(['/table']);
     });
   }
   getType(){

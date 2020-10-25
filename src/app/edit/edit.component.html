@@ -127,7 +127,7 @@ rangeFromControl.hasError('max') || rangeToControl.hasError('min')">
 && !typeControl.hasError('required') && !unitControl.hasError('required') &&
 !rangeFromControl.hasError('max') && !rangeToControl.hasError('min')">
         <div *ngIf="service.id">
-          <button mat-raised-button color="primary" (click)="updateSensor()" [routerLink]="['/table']">
+          <button mat-raised-button color="primary" (click)="updateSensor()">
             Save
           </button>
           <span class="interval">
@@ -137,7 +137,7 @@ rangeFromControl.hasError('max') || rangeToControl.hasError('min')">
         </span>
         </div>
         <div *ngIf="!service.id">
-          <button mat-raised-button color="primary" (click)="createNewSensor()" [routerLink]="['/table']">
+          <button mat-raised-button color="primary" (click)="createNewSensor()" >
             Save
           </button>
           <span class="interval">
