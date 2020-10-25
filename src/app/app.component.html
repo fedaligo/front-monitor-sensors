@@ -5,7 +5,7 @@
           <h1>Monitor Sensors</h1>
       </span>
       <span class="example-spacer"></span>
-      <div>
+      <div *ngIf="service.token">
         {{service.userName}}
         <button mat-raised-button (click)="service.logout()" [routerLink]="['']" color="primary">Logout</button>
       </div>

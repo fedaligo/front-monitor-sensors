@@ -49,6 +49,36 @@ export class TableComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  deleteSensor(id) {
+    const headers = new HttpHeaders({Authorization: `Bearer ${this.service.getTokenFromLocalStorage()}`});
+    this.http.delete('http://localhost:5000/sensors/delete/' + id, {
+      headers, responseType: 'text' as 'json'
+    }).subscribe((response) => {
+      this.ngOnInit();
+    });
+  }
+  getInfoOfSensors(id, sensorsName, model, rangeFrom, rangeTo, type, unit, location, description){
+    this.service.id = id;
+    this.service.sensorsName = sensorsName;
+    this.service.model = model;
+    this.service.rangeFrom = rangeFrom;
+    this.service.rangeTo = rangeTo;
+    this.service.type = type;
+    this.service.unit = unit;
+    this.service.location = location;
+    this.service.description = description;
+  }
+  clearInfoOfSensors(){
+    this.service.id = null;
+    this.service.sensorsName = null;
+    this.service.model = null;
+    this.service.rangeFrom = null;
+    this.service.rangeTo = null;
+    this.service.type = null;
+    this.service.unit = null;
+    this.service.location = null;
+    this.service.description = null;
+  }
 }
 
 

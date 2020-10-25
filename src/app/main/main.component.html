@@ -38,7 +38,8 @@
               </div>
               <div *ngIf="!loginFormControl.hasError('required') && !passwordFormControl.hasError('required')">
                 <nav class="interval">
-                  <button mat-raised-button type="submit" name="Login" id="go" value="Login" [routerLink]="['/table']" (click)="doLogin()"
+                  <button mat-raised-button type="submit" name="Login" id="go" value="Login"
+                          (click)="doLogin()"
                           color="primary">Login
                   </button>
                 </nav>

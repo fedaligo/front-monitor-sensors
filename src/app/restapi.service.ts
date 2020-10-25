@@ -1,31 +1,41 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestapiService {
-  public userName: any;
-  public role: any;
-  public responseUserByUserName: any;
+  public userName: any = localStorage.getItem('currentUser');
   public message: any;
-  public token: any;
-  public name: any;
-  public model: any;
-  public range1: any = 12;
-  public range2: any = 45;
-  public type: any;
-  public unit: any;
-  public location: any;
-  public description: any;
-  constructor(private http: HttpClient) { }
+  public token: any = localStorage.getItem('auth_token');
+  public id: number;
+  public sensorsName: string;
+  public model: string;
+  public rangeFrom: number;
+  public rangeTo: number;
+  public type: string;
+  public unit: string;
+  public location: string;
+  public description: string;
+  public showButton: any = localStorage.getItem('showButton');
+  constructor(private http: HttpClient, private router: Router) { }
+  showButtonForAdmin(){
+    if(this.userName === 'admin'){
+      this.showButton = 'admin';
+      localStorage.setItem('showButton', 'admin');
+    } else {
+      this.showButton = null;
+      localStorage.removeItem('showButton');
+    }
+  }
   logout() {
     localStorage.removeItem('auth_token');
-    localStorage.removeItem('roleAdmin');
     localStorage.removeItem('currentUser');
-    this.responseUserByUserName = null;
-    this.role = null;
+    localStorage.removeItem('showButton');
+    this.token = null;
     this.userName = null;
+    this.message = null;
   }
   login(userName: string, password: string) {
     this.message = '';
@@ -42,24 +52,15 @@ export class RestapiService {
         this.message = '';
         localStorage.setItem('auth_token', this.token);
         localStorage.setItem('currentUser', userName);
-        this.getRole();
+        this.showButtonForAdmin();
+        this.router.navigate(['/table']);
       } else {
+        this.router.navigate(['']);
         this.message = 'Incorrect login or password.';
       }
     });
   }
-  getRole() {
-    const headers = new HttpHeaders({Authorization: `Bearer ${this.getTokenFromLocalStorage()}`});
-    this.http.get('http://localhost:5000/users/usersrole', {
-      headers,
-      responseType: 'text' as 'json'
-    }).subscribe((response) => {
-      if (response === '[administrator]') {
-        this.role = response;
-        localStorage.setItem('roleAdmin', this.role);
-      }
-    });
-  }
+
   getTokenFromLocalStorage() {
     this.token = localStorage.getItem('auth_token');
     return this.token;

@@ -1,4 +1,4 @@
-<div class="example-container">
+<div *ngIf="service.showButton" class="example-container">
   <mat-card class="example-card">
     <div class="space">
       <div class="text">
@@ -12,8 +12,8 @@
         <td width="55%">
           <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
-            <input matInput maxlength="50" type="text" [formControl]="nameControl"
-                   [(ngModel)]="service.name">
+            <input matInput maxlength="30" type="text" [formControl]="nameControl"
+                   [(ngModel)]="sensorsName">
           </mat-form-field>
         </td>
       </tr>
@@ -23,8 +23,8 @@
         <td width="55%">
           <mat-form-field appearance="fill">
             <mat-label>Model</mat-label>
-            <input matInput maxlength="50" type="text" [formControl]="modelControl"
-                   [(ngModel)]="service.model">
+            <input matInput maxlength="15" type="text" [formControl]="modelControl"
+                   [(ngModel)]="model">
           </mat-form-field>
         </td>
       </tr>
@@ -36,13 +36,15 @@
             <tr>
               <td width="40%">
                 <mat-form-field appearance="fill" class="number-field">
-                  <input matInput type="number" [(ngModel)]="service.range1">
+                  <input matInput type="number" max="{{rangeTo}}" [(ngModel)]="rangeFrom"
+                         [formControl]="rangeFromControl">
                 </mat-form-field>
               </td>
               <td width="20%"><h2>To</h2></td>
               <td width="40%">
                 <mat-form-field appearance="fill" class="number-field">
-                  <input matInput type="number" [(ngModel)]="service.range2">
+                  <input matInput type="number" min="{{rangeFrom}}" [(ngModel)]="rangeTo"
+                         [formControl]="rangeToControl">
                 </mat-form-field>
               </td>
             </tr>
@@ -55,15 +57,11 @@
         <td width="55%">
           <mat-form-field appearance="fill">
             <mat-label>Select</mat-label>
-            <input type="text"
-                   matInput
-                   [formControl]="typeControl"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of options" [value]="option">
-                {{option}}
-              </mat-option>
-            </mat-autocomplete>
+            <mat-select [formControl]="typeControl" [(ngModel)]="type">
+                <mat-option *ngFor="let type of typeValues" [value]="type">
+                  {{type}}
+                </mat-option>
+            </mat-select>
           </mat-form-field>
         </td>
       </tr>
@@ -73,15 +71,11 @@
         <td width="55%">
           <mat-form-field appearance="fill">
             <mat-label>Select</mat-label>
-            <input type="text"
-                   matInput
-                   [formControl]="unitControl"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of options" [value]="option">
-                {{option}}
+            <mat-select [formControl]="unitControl" [(ngModel)]="unit">
+              <mat-option *ngFor="let unit of unitValues" [value]="unit">
+                {{unit}}
               </mat-option>
-            </mat-autocomplete>
+            </mat-select>
           </mat-form-field>
         </td>
       </tr>
@@ -91,7 +85,7 @@
         <td width="55%">
           <mat-form-field appearance="fill">
             <mat-label>location</mat-label>
-            <input matInput maxlength="50" type="text" [(ngModel)]="service.location">
+            <input matInput maxlength="40" type="text" [(ngModel)]="location">
           </mat-form-field>
         </td>
       </tr>
@@ -108,9 +102,11 @@
               <br>
               <br>
               <br>
+              <br>
+              <br>
               Here is another paragraph of input.
             </mat-label>
-            <textarea matInput type="text" [(ngModel)]="service.description" class="area"></textarea>
+            <textarea matInput type="text" maxlength="200" [(ngModel)]="description" class="area"></textarea>
           </mat-form-field>
         </td>
       </tr>
@@ -118,7 +114,8 @@
 
     <div class="space">
       <div *ngIf="nameControl.hasError('required') || modelControl.hasError('required')
-|| typeControl.hasError('required') || unitControl.hasError('required')">
+|| typeControl.hasError('required') || unitControl.hasError('required') ||
+rangeFromControl.hasError('max') || rangeToControl.hasError('min')">
         <button mat-raised-button disabled>Save</button>
         <span class="interval">
         <button mat-raised-button color="primary" [routerLink]="['/table']">
@@ -127,15 +124,29 @@
   </span>
       </div>
       <div *ngIf="!nameControl.hasError('required') && !modelControl.hasError('required')
-&& !typeControl.hasError('required') && !unitControl.hasError('required')">
-        <button mat-raised-button color="primary">
-          Save
-        </button>
-        <span class="interval">
+&& !typeControl.hasError('required') && !unitControl.hasError('required') &&
+!rangeFromControl.hasError('max') && !rangeToControl.hasError('min')">
+        <div *ngIf="service.id">
+          <button mat-raised-button color="primary" (click)="updateSensor()" [routerLink]="['/table']">
+            Save
+          </button>
+          <span class="interval">
         <button mat-raised-button color="primary" [routerLink]="['/table']">
           Cancel
         </button>
         </span>
+        </div>
+        <div *ngIf="!service.id">
+          <button mat-raised-button color="primary" (click)="createNewSensor()" [routerLink]="['/table']">
+            Save
+          </button>
+          <span class="interval">
+        <button mat-raised-button color="primary" [routerLink]="['/table']">
+          Cancel
+        </button>
+        </span>
+        </div>
+
       </div>
 
     </div>

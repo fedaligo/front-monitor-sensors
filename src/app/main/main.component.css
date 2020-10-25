@@ -29,6 +29,7 @@
   text-align: left;
 }
 .\.redtext{
+  text-align: center;
   font-size: large;
   color: red;
   margin-bottom: 3%;
